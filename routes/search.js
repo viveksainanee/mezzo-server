@@ -14,8 +14,11 @@ const api = axios.create({
 /** GET search */
 
 router.get('', async function(req, res, next) {
-  // do yelp call here
-  let response = await api.get(`/businesses/search?location='Seattle'`);
+  //query string will come in the format:
+  // ?loc1=${this.state.loc1}&loc2=${this.state.loc2}`
+  console.log('query string is', req.query);
+
+  let response = await api.get(`/businesses/search?location=${req.query.loc1}`);
   return res.json(response.data.businesses);
 });
 
